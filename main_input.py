@@ -3,8 +3,10 @@ from thetvdb import TheTVDB
 
 client = TheTVDB()
 db = AppDB()
+id = ""
 
-movies = db.movie_ids()
+while not id.isdigit():
+    id = input("Enter movie id: ")
 
 
 def get_movies_api(movies: []):
@@ -12,6 +14,7 @@ def get_movies_api(movies: []):
     for id in movies:
         movie = client.movie(id)
         print(movie)
+        db.inset_movie(movie)
 
 
-print(movies)
+get_movies_api([id])

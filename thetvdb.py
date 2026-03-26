@@ -8,17 +8,19 @@ class TheTVDB:
         self.__client = Rest(api)
         self.api_key = api_key if api_key else "8481ad97-d671-45a1-95ee-277241e6d328"
 
-    def __to_movie(self, data: dict):
-        title = data.get("name")
-        year = data.get("year")
-
-        return {
+    def __to_movie(self, data: dict, ALL=False):
+        movie = {
             "id": data.get("id"),
-            "image": data.get("image"),
-            "title": title,
-            "slug": data.get("slug"),
-            "year": year,
+            "name": data.get("name"),
+            "runtime": data.get("runtime"),
+            "release_year": data.get("year"),
+            "tvdb_link": f"https://www.thetvdb.com/movies/{data.get("slug")}",
+            "poster_file": data.get("image"),
         }
+        if ALL:
+            movie = {**movie, "image": data.get("image"), "slug": data.get("slug")}
+
+        return movie
 
     def login(self):
         data = self.__client.post("login", {"apikey": self.api_key})

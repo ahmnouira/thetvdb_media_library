@@ -1,6 +1,5 @@
 from app_db import AppDB
 
-
 db = AppDB()
 
-db.movies()
+db.movies_cols()
