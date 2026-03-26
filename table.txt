@@ -1,0 +1,23 @@
+mysql> desc movies;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| mid           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name          | varchar(250) | NO   |     | NULL    |                |
+| release_year  | varchar(25)  | YES  |     | NULL    |                |
+| size          | varchar(15)  | YES  |     | NULL    |                |
+| file_name     | varchar(150) | YES  |     | NULL    |                |
+| poster_file   | varchar(150) | YES  |     | NULL    |                |
+| video_codec   | varchar(25)  | YES  |     | NULL    |                |
+| audio_codec   | varchar(25)  | YES  |     | NULL    |                |
+| runtime       | varchar(10)  | YES  |     | NULL    |                |
+| language      | varchar(25)  | YES  |     | NULL    |                |
+| genre         | varchar(50)  | YES  |     | NULL    |                |
+| imdb_link     | varchar(250) | YES  |     | NULL    |                |
+| tvdb_link     | varchar(250) | YES  |     | NULL    |                |
+| tmdb_link     | varchar(250) | YES  |     | NULL    |                |
+| mdblist_link  | varchar(250) | YES  |     | NULL    |                |
+| trakt_link    | varchar(250) | YES  |     | NULL    |                |
+| rt_link       | varchar(250) | YES  |     | NULL    |                |
+| description   | varchar(250) | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
