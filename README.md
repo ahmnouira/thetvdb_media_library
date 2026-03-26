@@ -2,17 +2,16 @@
 
 ## DEMO
 
-<video width="320" height="240" controls>
-  <source src="output.mp4" type="video/mp4">
-  not supported.
-</video>
-
-![](output.mp4)
+https://github.com/user-attachments/assets/1f6c718e-1f8c-433d-82fb-1f353b5b4d63
 
 ## Run
 
 ```sh
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:8
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASS
+
+
+
+WORD=root mysql:8
 docker rm mysql
 mysql -u root -p
 # root
