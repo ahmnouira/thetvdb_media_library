@@ -7,3 +7,4 @@ warnings.filterwarnings("ignore")
 
 
 TOKEN = os.getenv("")
+APP_NAME = os.getenv("APP_NAME")

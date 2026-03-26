@@ -3,32 +3,33 @@ import mysql.connector
 
 
 class Database:
-    def __init__(self, local: bool = True) -> None:
-        if local:
-            self.uri = "mongodb://admin:password@localhost:27017/"
-        else:
-            self.uri = "mongodb+srv://lamiarouag1998:O5EHAScDqFn4KIYW@cluster0.zoeej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    def __init__(
+        self, user="root", password="", database="", local: bool = True
+    ) -> None:
 
-        self.db = mysql.connector.connect(
-            host="localhost", user="root", password="yourpassword", database="media_db"
-        )
+        if local:
+            self.db = mysql.connector.connect(
+                host="localhost",  # inside a container
+                user=user,
+                password=password,
+                database=database,
+            )
 
         self.cursor = self.db.cursor(dictionary=True)
-        print(self.client)
 
-    def save(self, data: dict, predictions: list[float], duration: float, name: str):
-        data = data.dict()
-        data["predictions"] = predictions
-        data["duration"] = duration
-        data["name"] = name
-        data["created_at"] = datetime.now()
-        self.collection.insert_one(data)
+    def exec(self, sql: str, params=()):
+        self.cursor.execute(sql, params=params)
+        return self.cursor.fetchall()
 
-    def all(self):
-        items = []
-        for item in self.collection.find():
-            items.append(get_item(item))
-        return items
+    def exec_close(self, sql: str):
+        self.exec(sql)
+        self.cursor.close()
+
+    def all(self, table: str):
+        self.exec(f"SELECT * FROM %s", (table))
+
+    def save(self, data: dict):
+        pass
 
     def get(self, id):
         return {}
@@ -39,6 +40,6 @@ class Database:
     def clean(self):
         items = self.coll
 
-    def close(self):
+    def close_all(self):
         self.cursor.close()
         self.db.close()

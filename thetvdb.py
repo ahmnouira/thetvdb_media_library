@@ -29,12 +29,18 @@ class TheTVDB:
     def get_headers(self) -> dict[str, str]:
         return {"Authorization": f"Bearer {self.token}"}
 
+    def __get(self, url: str):
+        data = self.__client.get(url, headers=self.get_headers())
+        if data and "data" in data:
+            return self.__to_movie(data["data"])
+
     def movies(self):
         data = self.__client.get("movies", headers=self.get_headers())
         if data:
             return data["data"]
 
     def movie(self, id: str):
-        data = self.__client.get(f"movies/{id}", headers=self.get_headers())
-        if data:
-            return self.__to_movie(data["data"])
+        return self.__get(f"movies/{id}")
+
+    def movie_by_slub(self, slug: str):
+        return self.__get(f"movies/{slug}")
